@@ -9,7 +9,7 @@ chatForm.addEventListener('submit', (e) => {
   const msg = e.target.elements.msg.value
   console.log(msg);
 })
-//this is what connects us to the backend
+// this is what connects us to the backend
 socket.on('message', (message) => {
   console.log(message);
 })

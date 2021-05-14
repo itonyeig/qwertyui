@@ -4,47 +4,17 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
-    integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
-  <link rel="stylesheet" href="style.css" />
-  <title>IdReal Chat</title>
+  <title>Chat</title>
 </head>
 <body>
-  <div class="chat-container">
-    <div class="chat-form-container">
-      <div class="container">
-        <img src="" alt="Avatar">
-        <p>Hello. How are you today?</p>
-        <span class="time-right">11:00</span>
+  <main class="join-main">
+    <form action="chat.html">
+      <div class="form-control">
+        <label for="username">Username</label>
+        <input type="text" name="username" id="username" placeholder="Enter username..." autocomplete="off" required />
+        <button type="submit" class="btn">Join Chat</button>
       </div>
-      
-      <div class="container darker">
-        <img src="#" alt="Avatar" class="right">
-        <p>Hey! I'm fine. Thanks for asking!</p>
-        <span class="time-left">11:01</span>
-      </div>
-      
-      <div class="container">
-        <img src="#" alt="Avatar">
-        <p>Sweet! So, what do you wanna do today?</p>
-        <span class="time-right">11:02</span>
-      </div>
-      
-      <div class="container darker">
-        <img src="#" alt="Avatar" class="right">
-        <p>Nah, I dunno. Play soccer.. or learn more coding perhaps?</p>
-        <span class="time-left">11:05</span>
-      </div>
-      <div class="chat-form-container">
-        <form id="chat-form" action="">
-          <input id="msg" type="text" placeholder="Enter Message" required autocomplete="off" />
-          <button class="btn"><i class="fas fa-paper-plane"></i> Send</button>
-        </form>
-      </div>
-    </div>
-  </div>
-  
-  <script src="/socket.io/socket.io.js"></script>
-  <script src="js/main.js"></script>
+    </form>
+  </main>
 </body>
 </html>

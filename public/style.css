@@ -35,11 +35,16 @@
   margin: 10px 0;
 }
 
-/* Darker chat container */
-.darker {
+.darker{
   border-color: #ccc;
   background-color: #ddd;
 }
+
+/* Darker chat container */
+/* .darker {
+  border-color: #ccc;
+  background-color: #ddd;
+} */
 
 /* Clear floats */
 .container::after {
@@ -74,4 +79,42 @@
 .time-left {
   float: left;
   color: #999;
+}
+
+/* put sidebar and chat messages next to each other */
+.chat-main {
+	display: grid;
+	grid-template-columns: 1fr 3fr;
+}
+
+.chat-sidebar {
+	background: var(--dark-color-b);
+	color: black;
+	padding: 20px 20px 60px;
+	overflow-y: scroll;
+      /* position: fixed; */
+
+}
+
+
+
+.chat-sidebar h2 {
+	font-size: 20px;
+	background: rgba(0, 0, 0, 0.1);
+	padding: 10px;
+	margin-bottom: 20px;
+}
+
+.chat-sidebar h3 {
+	margin-bottom: 15px;
+}
+
+.chat-sidebar ul li {
+	padding: 10px 0;
+}
+
+.chat-messages {
+	padding: 30px;
+	max-height: 500px;
+	overflow-y: scroll;
 }

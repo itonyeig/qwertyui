@@ -1,49 +1,56 @@
 const path = require('path')
-const express = require('express');
-const formatMessage = require('./utils/messages')
+const express = require('express')
 const app = express();
-const http = require('http');
-const server = http.createServer(app);//// initializes app to be a function handler that you can supply to an HTTP server
+// Initialization of socket.io on server
+const httpServer = require("http").createServer(app);
+const options = { /* ... */ };
+const io = require("socket.io")(httpServer, options);
 
-// Integrating Socket.IO
-const { Server } = require("socket.io");
-const io = new Server(server);
-
-
+const formatMessage = require('./utils/messages')
+const { userJoins, getCurrentUser } = require('./utils/users')
 //set static folder
+
+
+
 app.use(express.static(path.join(__dirname, 'public')))
 
-// Listen for connection event for incoming sockets and log it to the console
+//**********changes begin here*********
+
+// I  register a middleware which checks the username and allows the connection:
+// io.use((socket, next) => {
+//   const username = socket.handshake.auth.username;
+//   console.log(username);
+//   next();
+// })
+
 io.on('connection', (socket) => {
-  console.log('new webservice connection');
-
-  //broadcasts only to the client that just connected
-  // socket.emit('message', 'link is established on the front end');
   
-  //broadcast to clients already connected that a new client is connected. New client does not get this broadcast
-  socket.broadcast.emit('message', 'a user has joined the chat');
-
-  // this runs when a client disconnects
-  
-
-  //send message. broadcast to all clients connected.
-  // io.emit()
-
-  //disconnect
-
-  //listen for 'chatMessage' from client/user
-  socket.on('chatMessage', (msg) => {
-    //emitts it to all users
-    io.emit('message', formatMessage('USER', msg))
+  //listen for message from server
+  socket.on('chatMessages', (msg) => {
+    //emit on message to all users
+    io.emit('message', msg)
   })
+
+  socket.on('username', (username) => {
+    const users = userJoins(socket.id, username);
+    // const user = getCurrentUser(socket.id)
+    
+  
+    // we send all existing users to the client:
+    io.emit("users", (users));
+  
+  })
+
+  
 });
 
 
 
 
-const PORT = process.env.PORT || 2000;
+const PORT = process.env.PORT || 3000;
 
 //  my server now listents to connections on the PORT connection
-server.listen(PORT, () => {
+httpServer.listen(PORT, () => {
   console.log(`***Server is running on ${PORT}***`);
 })
+
